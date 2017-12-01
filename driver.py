@@ -50,7 +50,8 @@ client_sk = cm.connect_to_server('192.168.0.102', 5000)
 steering_vector = np.asarray( [0, 0, 0] ).astype(np.uint8)
 speed = 0
 
-total = tr_set_size + te_set_size
+data_set = 'train'
+flag = True
 
 while counter < total :
 
@@ -73,9 +74,12 @@ while counter < total :
 
 	bottom_half = ( np.split( frame.flatten(), 2 ) ) [1]
 
-	if counter < tr_set_size : dsm_writer.insert_entry(bottom_half, label, index_pointer, 'train')
+	if flag :
+		if counter > tr_set_size :
+			data_set = 'test'
+			flag = False
 
-	else : dsm_writer.insert_entry(bottom_half, label, index_pointer, 'test')
+	dsm_writer.insert_entry(bottom_half, label, index_pointer, data_set)
 
 	index_pointer += 1
 	if index_pointer == tr_set_size : index_pointer = 0
