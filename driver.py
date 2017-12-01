@@ -42,8 +42,7 @@ te_set_size = dsm_writer.get_te_set_size()
 sample_size = dsm_writer.get_sample_size()
 label_size = dsm_writer.get_label_size()
 
-index_pointer = 0
-counter = 0
+index_pointer = counter = 0
 
 total_bytes_per_frame = 76821 # 320 X 240 uin8 pixels values
 bytes_per_chunk = 4096

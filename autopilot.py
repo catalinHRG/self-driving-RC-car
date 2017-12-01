@@ -3,11 +3,14 @@ import socket as sk
 import numpy as np
 import connectivity_manager as cm
 import data_set_manager as dsm
+import sys
 
 from time import time, sleep
-from sys import getsizeof
 
 # laying out TF model
+
+client_ip_address = sys.argv[1]
+port = int( sys.argv[2] )
 
 input_layer_size = dsm.HDF5_DataSet.get_sample_size()
 hidden_layer_size = 150
@@ -55,9 +58,9 @@ def autopilot(x):
 	output_layer = tf.add(tf.matmul(first_layer, w_o), w_o)
 	output_layer = tf.nn.softmax( output_layer )
 
-	max_index = np.argmax(output_layer)
+	max_index = np.argmax( output_layer )
 	prediction = np.zeros( output_layer_size, dtype = np.uint8 )
-	np.put(prediction, max_index, 1)
+	np.put( prediction, max_index, 1 )
 
 	return prediction # one-hot encoded vector
 
@@ -71,7 +74,7 @@ with tf.Session as sess :
 	saver = tf.train.Saver()
 	saver.restore(sess, "models/model.ckpt")
 
-client = cm.connct_to_server("192.168.0.102", 5000)
+client = cm.connct_to_server(client_ip_address, port)
 
 total = 38421
 chunk_size = 4096
@@ -81,7 +84,7 @@ raw_data = steering_vector.tostring()
 
 while True :
 
-	print 'Sending : ', steering_vector, ' size : ', getsizeof(raw_data)
+	print 'Sending : ', steering_vector, ' size : ', sys.getsizeof( raw_data )
 	client.sendall( raw_data )
 
 	raw_data = cm.collect_bytes(client, total, chunk_size)
