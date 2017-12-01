@@ -2,7 +2,7 @@
 
 # -------------------------------------------
 
-# RPI3 mounted on the RC car alongside an USB camera and a power bank. The added weight will come in handy since it will limit the speed of the RC car to a more managable amount given the current overall delay on the communication chain (network + computation latency)
+# RPI3 mounted on the RC car alongside an USB camera and a power bank.
 
 # The raspberry pi will do the capture and some pre processing before sending via TCP/IP socket the bottom half of the flattened frame matrix to a laptop.
 # The bytes are collected, decoded, and fed into the TensorFlow model where all the computation is done on the GPU.
