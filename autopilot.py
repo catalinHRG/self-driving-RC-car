@@ -55,8 +55,8 @@ def autopilot(x):
 	output_layer = tf.add(tf.matmul(first_layer, w_o), w_o)
 	output_layer = tf.nn.softmax( output_layer )
 
-	max_index = tf.argmax(output_layer)
-	prediction = np.zeros( len( output_layer ), dtype = np.uint8 )
+	max_index = np.argmax(output_layer)
+	prediction = np.zeros( output_layer_size, dtype = np.uint8 )
 	np.put(prediction, max_index, 1)
 
 	return prediction # one-hot encoded vector
