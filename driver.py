@@ -50,7 +50,7 @@ bytes_per_chunk = 4096
 client_sk = cm.connect_to_server(client_ip_address, port)
 
 steering_vector = np.asarray( [0, 0, 0] ).astype(np.uint8)
-initial_duty_cycle = 0
+speed = 0
 
 data_set = 'train'
 flag = True
@@ -70,7 +70,7 @@ while counter < total :
 	cv2.waitKey( 1 )
 	cv2.imshow('Video', frame)
 
-	steering_vector, speed = get_steering_vector('left', 'right', 'q', 'w', 50, initial_duty_cycle)
+	steering_vector, speed = get_steering_vector('left', 'right', 'q', 'w', 50, speed)
 
 	label = dsm.convert_to_label( steering_vector )
 
