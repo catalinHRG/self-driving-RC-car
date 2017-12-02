@@ -32,7 +32,7 @@ def get_steering_vector(left_key, right_key, increase_key, decrease_key, delta, 
 	return temp.astype(np.uint8), duty_cycle
 
 # global variables
-dsm_writer = dsm.HDF5_Writer('DataSet.h5')
+dsm_writer = dsm.HDF5_Writer('utils/DataSet.h5')
 
 client_ip_address = sys.argv[1]
 port = int( sys.argv[2] )

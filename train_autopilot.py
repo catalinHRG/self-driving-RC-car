@@ -16,7 +16,7 @@ mini_batch_size = int( sys.argv[2] )
 
 tr_accuracy = te_accuracy = 0
 
-file_reader = dsm.HDF5_Reader('DataSet.h5')
+file_reader = dsm.HDF5_Reader('utils/DataSet.h5')
 
 tr_batches = tr_size / 100
 te_batches = te_size / 100
