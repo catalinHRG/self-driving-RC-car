@@ -68,13 +68,13 @@ compute_prediction = autopilot(x)
 
 # loading TF model from disk
 
-with tf.Session as sess :
+with tf.Session() as sess :
 
 	sess.run(tf.global_variables_initializer())
 	saver = tf.train.Saver()
 	saver.restore(sess, "models/model.ckpt")
 
-client = cm.connct_to_server(client_ip_address, port)
+client = cm.connect_to_server(client_ip_address, port)
 
 total = 38421
 chunk_size = 4096

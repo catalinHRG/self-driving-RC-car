@@ -89,7 +89,7 @@ with tf.Session() as sess :
 		tr_accuracy = tr_accuracy / tr_batches
 		te_accuracy = te_accuracy / te_batches
 
-		print 'Training accuracy : ', tr_accuracy, ' Test accuracy :  ', te_accuracy
+		print 'Training set accuracy : ', tr_accuracy, ' Test set accuracy :  ', te_accuracy
 
 	saver = tf.train.Saver()
 	saver.save(sess, 'models/model.ckpt')
