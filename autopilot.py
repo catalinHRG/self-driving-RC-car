@@ -1,10 +1,10 @@
 import tensorflow as tf
 import socket as sk
 import numpy as np
-import connectivity_manager as cm
-import data_set_manager as dsm
 import sys
 
+from utils import connectivity_manager as cm
+from utils import data_set_manager as dsm
 from time import time, sleep
 
 # laying out TF model

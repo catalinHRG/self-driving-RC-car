@@ -9,11 +9,11 @@ is to use the arrow keys on the keyboard to control the car.
 import numpy as np
 import cv2
 import socket as sk
-import data_set_manager as dsm
-import connectivity_manager as cm
 import h5py as h5
 import sys
 
+from utils import data_set_manager as dsm
+from utils import connectivity_manager as cm
 from time import sleep, time
 from keyboard import is_pressed
 
@@ -90,3 +90,4 @@ while counter < total :
 
 dsm_writer.close_file()
 cv2.destroyAllWindows()
+
