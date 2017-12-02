@@ -10,37 +10,38 @@ class HDF5_DataSet() :
 	_te_set_size = 1000
 	_sample_size = 38400
 	_label_size = 7
+	_file = None
 
 	def __init__ (self, file_name, mode) :
 
 		if not os.path.exists(file_name) :
 
 			print 'File does not exist , will create it and all the data sets inside !! '
-			file = h5.File(file_name, 'w')
+			self._file = h5.File(file_name, 'w')
 
-			file.create_dataset('tr_samples', (self._tr_set_size, self._sample_size), 'u1')
-			file.create_dataset('tr_labels', (self._tr_set_size, self._label_size), 'u1')
-			file.create_dataset('te_samples', (self._te_set_size, self._sample_size), 'u1')
-			file.create_dataset('te_labels', (self._te_set_size, self._label_size), 'u1')
+			self._file.create_dataset('tr_samples', (self._tr_set_size, self._sample_size), 'u1')
+			self._file.create_dataset('tr_labels', (self._tr_set_size, self._label_size), 'u1')
+			self._file.create_dataset('te_samples', (self._te_set_size, self._sample_size), 'u1')
+			self._file.create_dataset('te_labels', (self._te_set_size, self._label_size), 'u1')
 
-			file.close()
+			self._file.close()
 
 			print 'Closing file !! '
 
 		print 'Opening file for ', ( 'read only' if mode == 'r' else 'append only' ) 
-		self.file = h5.File(file_name, mode)
+		self._file = h5.File(file_name, mode)
 
 		print 'Getting data set handlers ... '
-		self.tr_samples = self.file['/tr_samples']
-		self.tr_labels = self.file['/tr_labels']
-		self.te_samples = self.file['/te_samples']
-		self.te_labels = self.file['/te_labels']
+		self.tr_samples = self._file['/tr_samples']
+		self.tr_labels = self._file['/tr_labels']
+		self.te_samples = self._file['/te_samples']
+		self.te_labels = self._file['/te_labels']
 		print 'Got all data set handlers'
 
-	@classmethod
+	#@classmethod
 	def close_file(self) :
 
-		self.file.close()
+		self._file.close()
 	
 	@classmethod
 	def get_tr_set_size(self):

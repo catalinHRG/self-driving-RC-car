@@ -2,8 +2,7 @@ import numpy as np
 import cv2
 import connectivity_manager as cm
 import RPi.GPIO as gpio
-
-from sys import getsizeof
+import sys
 
 m1_pin1 = 21
 m1_pin2 = 22
@@ -25,14 +24,14 @@ gpio.setup(pwm_pin1, gpio.OUT)
 
 steering_vector_size = 40 # bytes
 
-server_address = '192.168.0.102'
-port = 5000
+server_ip_address = sys.argv[1]
+port = int( sys.argv[2] )
 
 capture = cv2.VideoCapture(0)
 capture.set(3, 320)
 capture.set(4, 240)
 
-connection = cm.set_up_server( server_address, port )
+connection = cm.set_up_server( server_ip_address, port )
 
 steering_vector = np.asarray( [0, 0, 0], dtype = np.uint8 )
 
@@ -61,5 +60,5 @@ while True :
 	flat_gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY).flatten()
 
 	raw_data = flat_gray_frame.tostring()
-	print 'Sending ' , getsizeof(data) , ' bytes of data ...' 
+	print 'Sending ' , sys.getsizeof(data) , ' bytes of data ...' 
 	connection.sendall( raw_data )
