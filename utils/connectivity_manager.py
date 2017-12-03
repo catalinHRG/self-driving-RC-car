@@ -1,5 +1,4 @@
 import socket as sk
-import serial as sr
 
 from time import sleep
 from sys import getsizeof
