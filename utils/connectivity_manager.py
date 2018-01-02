@@ -17,7 +17,7 @@ def set_up_server(server_address, port) :
 	server = sk.socket(sk.AF_INET, sk.SOCK_STREAM)
 
 	print 'Binding address / port to socket ...'
-	server.bind((address, port))
+	server.bind((server_address, port))
 	server.listen(0)
 
 	print 'Waiting for connection ...'
